@@ -1,58 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+import Theme from "./settings/Theme";
+
+import Login from './pages/login';
+import SignUp from './pages/signup';
+import MyProfile from './pages/profile/myProfile';
+import ProfileSettings from './pages/profile/profileSettings'
+import Dashboard from './layouts/receptionists/Dashboard';
+import Patient from './layouts/receptionists/Patients';
+import Reservation from './layouts/receptionists/Reservations';
+import Schedules from './layouts/receptionists/Schedules';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+    <>
+      <CssBaseline/>
+      <ThemeProvider theme={Theme("theme1")}>
+        <BrowserRouter>
+          <Routes>
+            <Route path={"/"} element={<Navigate to='/login'/>}/>
+            <Route path={"/login"} element={<Login/>}/>
+            <Route path={"/signup"} element={<SignUp/>}/>
+            <Route path={"/receptionist/dashboard"} element={<Dashboard/>}/>
+            <Route path={"/receptionist/patient"} element={<Patient/>}/>
+            <Route path={"/receptionist/reservation"} element={<Reservation/>}/>
+            <Route path={"/receptionist/schedules"} element={<Schedules/>}/>
+            <Route path={"/my-settings"} element={<MyProfile/>}/>
+            <Route path={"/profile-settings"} element={<ProfileSettings/>} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </>
+  )
 }
 
 export default App;
